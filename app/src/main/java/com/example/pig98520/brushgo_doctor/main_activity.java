@@ -19,6 +19,6 @@ public class main_activity extends AppCompatActivity {
 
 
     private void processControl() {
-        
+
     }
 }
