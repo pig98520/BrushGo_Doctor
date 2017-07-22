@@ -1,14 +1,19 @@
 package com.example.pig98520.brushgo_doctor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -16,9 +21,14 @@ import java.util.List;
 
 public class main_activity extends AppCompatActivity {
     private Spinner name_spin;
+    private String name;
+    private String uid;
+    private Button confirm;
     private List<String> nameList = new ArrayList<String>();
     private ArrayAdapter<String> nameAdapter;
     private DatabaseReference dbRef;
+    private Intent intent;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +40,15 @@ public class main_activity extends AppCompatActivity {
 
     private void processView() {
         name_spin= (Spinner) findViewById(R.id.name_spin);
-    }
-
-    private void processControl() {
         nameAdapter = new ArrayAdapter<String>(this, R.layout.spinner_style, nameList);
         nameAdapter.setDropDownViewResource(R.layout.spinner_style);
         name_spin.setAdapter(nameAdapter);
+        confirm=(Button)findViewById(R.id.confirm_btn);
+        intent = new Intent();
+        bundle= new Bundle();
+    }
 
+    private void processControl() {
         dbRef = FirebaseDatabase.getInstance().getReference().child("profile");
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -52,6 +64,41 @@ public class main_activity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+        name_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                name=name_spin.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Query query = dbRef.orderByChild("name").equalTo(name);
+                query.addValueEventListener(new ValueEventListener() {
+                    public void onDataChange(DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                            uid=dataSnapshot.getKey().toString();
+                            bundle.putString("uid", uid);
+                            intent.setClass(main_activity.this, tooth_activity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+/*                            Toast.makeText(main_activity.this,uid,Toast.LENGTH_LONG).show();*/
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
     }
