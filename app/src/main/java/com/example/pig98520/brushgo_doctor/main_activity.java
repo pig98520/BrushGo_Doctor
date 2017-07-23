@@ -59,7 +59,6 @@ public class main_activity extends AppCompatActivity {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                     DB_profile data = snapshot.getValue(DB_profile.class);
                     nameList.add(data.getName());
@@ -102,7 +101,6 @@ public class main_activity extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*                checkupDialog();*/
                 bundle.putString("uid", uid);
                 intent.setClass(main_activity.this, tooth_activity.class);
                 intent.putExtras(bundle);
@@ -120,8 +118,10 @@ public class main_activity extends AppCompatActivity {
 
                 if(dataSnapshot.getValue().toString().trim().equals(nowDate))
                     bundle.putBoolean("back",false);
-                else
-                    bundle.putBoolean("back",true);
+                else {
+                    bundle.putBoolean("back", true);
+                    dbRef.child(uid).child("back_date").setValue(nowDate);
+                }
             }
 
             @Override
