@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,6 +21,8 @@ public class tooth_activity extends AppCompatActivity {
     private Bundle bundle;
     private String uid;
     private boolean back;
+    private EditText pcr;
+    private Button save;
     private DatabaseReference dbRef;
     private Button tooth[]=new Button[28];
     private Boolean status[]=new Boolean[28];
@@ -64,8 +68,10 @@ public class tooth_activity extends AppCompatActivity {
     private void setToothCondition() {
         if(!back)
         {
-            for(int i=0;i<tooth.length;i++)
-                dbRef.child("tooth").child(uid).child(i+1+"").setValue("g");
+            for(int i=0;i<tooth.length;i++) {
+                dbRef.child("tooth").child(uid).child(i + 1 + "").setValue("g");
+                status[i]=true;
+            }
         }
         else{
             for(int j=0;j<tooth.length;j++) {
@@ -96,9 +102,10 @@ public class tooth_activity extends AppCompatActivity {
 
 
     private void processView() {
-        for(int i=0;i<tooth.length;i++) {
+        for(int i=0;i<tooth.length;i++)
             tooth[i] = (Button) findViewById(id[i]);
-        }
+        pcr=(EditText)findViewById(R.id.pcr_edt);
+        save=(Button)findViewById(R.id.save_btn);
         dbRef= FirebaseDatabase.getInstance().getReference();
         bundle = this.getIntent().getExtras();
         uid = bundle.getString("uid");
@@ -125,6 +132,18 @@ public class tooth_activity extends AppCompatActivity {
                 }
             });
         }
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!back)
+                    dbRef.child("profile").child(uid).child("first_pcr").setValue(pcr.getText().toString().trim());
+                else
+                    dbRef.child("profile").child(uid).child("second_pcr").setValue(pcr.getText().toString().trim());
+
+                pcr.setText("");
+                Toast.makeText(tooth_activity.this,"PCR已儲存",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }
