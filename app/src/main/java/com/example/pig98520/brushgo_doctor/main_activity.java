@@ -130,26 +130,4 @@ public class main_activity extends AppCompatActivity {
             }
         });
     }
-
-    /*private void checkupDialog() {
-        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
-        dialog.setTitle("病患狀況");
-        dialog.setMessage("請問是否為BrushGo回診病患?");
-        DialogInterface.OnClickListener yesClick =new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                bundle.putBoolean("back",true);
-            }
-        };
-        DialogInterface.OnClickListener noClick=new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                bundle.putBoolean("back",false);
-            }
-        };
-
-        dialog.setNeutralButton("是",yesClick);
-        dialog.setNegativeButton("否",noClick);
-        dialog.show();
-    }*/
 }
