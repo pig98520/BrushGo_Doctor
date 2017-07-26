@@ -59,6 +59,7 @@ public class main_activity extends AppCompatActivity {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                nameList.clear();
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                     DB_profile data = snapshot.getValue(DB_profile.class);
                     nameList.add(data.getName());
