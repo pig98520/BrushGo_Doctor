@@ -28,6 +28,7 @@ public class main_activity extends AppCompatActivity {
     private String uid;
     private String nowDate;
     private TextView install_date;
+    private TextView back_date;
     private Button confirm;
     private List<String> nameList = new ArrayList<String>();
     private ArrayAdapter<String> nameAdapter;
@@ -50,6 +51,7 @@ public class main_activity extends AppCompatActivity {
         name_spin.setAdapter(nameAdapter);
         confirm=(Button)findViewById(R.id.confirm_btn);
         install_date=(TextView)findViewById(R.id.txt_installDate);
+        back_date=(TextView)findViewById(R.id.txt_backDate);
         intent = new Intent();
         bundle= new Bundle();
     }
@@ -123,6 +125,22 @@ public class main_activity extends AppCompatActivity {
                     bundle.putBoolean("back", true);
                     dbRef.child(uid).child("back_date").setValue(nowDate);
                 }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        dbRef.child(uid).child("back_date").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    back_date.setText("預計回診日期:"+dataSnapshot.getValue().toString().trim());
+                }
+                else
+                    back_date.setText("預計回診日期:");
             }
 
             @Override

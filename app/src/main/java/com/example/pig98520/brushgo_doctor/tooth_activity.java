@@ -1,9 +1,11 @@
 package com.example.pig98520.brushgo_doctor;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -12,6 +14,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by pig98520 on 2017/7/21.
@@ -22,6 +28,9 @@ public class tooth_activity extends AppCompatActivity {
     private String uid;
     private boolean back;
     private EditText pcr;
+    private Calendar calendar;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN);
+    private String backDate;
     private Button save;
     private DatabaseReference dbRef;
     private Button tooth[]=new Button[28];
@@ -105,6 +114,7 @@ public class tooth_activity extends AppCompatActivity {
         for(int i=0;i<tooth.length;i++)
             tooth[i] = (Button) findViewById(id[i]);
         pcr=(EditText)findViewById(R.id.pcr_edt);
+        calendar=Calendar.getInstance();
         save=(Button)findViewById(R.id.save_btn);
         dbRef= FirebaseDatabase.getInstance().getReference();
         bundle = this.getIntent().getExtras();
@@ -135,15 +145,40 @@ public class tooth_activity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!back)
-                    dbRef.child("profile").child(uid).child("first_pcr").setValue(pcr.getText().toString().trim());
-                else
-                    dbRef.child("profile").child(uid).child("second_pcr").setValue(pcr.getText().toString().trim());
-
-                pcr.setText("");
-                Toast.makeText(tooth_activity.this,"PCR已儲存",Toast.LENGTH_LONG).show();
+                if(pcr.getText().toString().trim().equals(""))
+                    Toast.makeText(tooth_activity.this,"請輸入PCR",Toast.LENGTH_LONG).show();
+                else {
+                    if(!back) {
+                        dbRef.child("profile").child(uid).child("first_pcr").setValue(pcr.getText().toString().trim());
+                        backTimedialog();
+                    }
+                    else if(back) {
+                        dbRef.child("profile").child(uid).child("second_pcr").setValue(pcr.getText().toString().trim());
+                        Toast.makeText(tooth_activity.this,"PCR已儲存",Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
     }
-
+    private void backTimedialog() {
+        DatePickerDialog dialog = new DatePickerDialog(tooth_activity.this,
+                datepicker,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        dialog.show();
+    }
+    DatePickerDialog.OnDateSetListener datepicker = new DatePickerDialog.OnDateSetListener()
+    {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+        {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, monthOfYear);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            backDate=sdf.format(calendar.getTime());
+            dbRef.child("profile").child(uid).child("back_date").setValue(backDate);
+            Toast.makeText(tooth_activity.this,"PCR及回診日期已儲存",Toast.LENGTH_LONG).show();
+        }
+    };
 }
