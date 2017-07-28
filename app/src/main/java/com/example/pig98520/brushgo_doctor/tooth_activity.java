@@ -1,6 +1,7 @@
 package com.example.pig98520.brushgo_doctor;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,6 +36,7 @@ public class tooth_activity extends AppCompatActivity {
     private DatabaseReference dbRef;
     private Button tooth[]=new Button[28];
     private Boolean status[]=new Boolean[28];
+    private Intent intent;
     private int id[]=new int[]
             {R.id.tooth_1,
             R.id.tooth_2,
@@ -64,6 +66,15 @@ public class tooth_activity extends AppCompatActivity {
             R.id.tooth_26,
             R.id.tooth_27,
             R.id.tooth_28};
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        intent=new Intent();
+        intent.setClass(tooth_activity.this,main_activity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

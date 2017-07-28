@@ -31,11 +31,11 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/tooth_clean_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41" />
+        app:layout_constraintVertical_bias="0.42000002" />
 
     <Button
         android:id="@+id/tooth_2"
@@ -51,7 +51,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.337" />
+        app:layout_constraintVertical_bias="0.35000002" />
 
     <Button
         android:id="@+id/tooth_3"
@@ -63,7 +63,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/tooth_clean_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.171"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -223,11 +223,11 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/tooth_clean_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintHorizontal_bias="0.881"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.337" />
+        app:layout_constraintVertical_bias="0.35000002" />
 
     <Button
         android:id="@+id/tooth_14"
@@ -239,11 +239,11 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/tooth_clean_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintHorizontal_bias="0.899"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41" />
+        app:layout_constraintVertical_bias="0.42000002" />
 
     <Button
         android:id="@+id/tooth_15"
@@ -255,7 +255,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/tooth_clean_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -271,7 +271,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/tooth_clean_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -447,7 +447,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/tooth_clean_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintHorizontal_bias="0.88"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -463,7 +463,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/tooth_clean_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
