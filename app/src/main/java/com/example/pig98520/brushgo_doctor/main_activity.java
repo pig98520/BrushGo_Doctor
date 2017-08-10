@@ -2,6 +2,7 @@ package com.example.pig98520.brushgo_doctor;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +37,32 @@ public class main_activity extends AppCompatActivity {
     private DatabaseReference dbRef;
     private Intent intent;
     private Bundle bundle;
+    private boolean isdoubleClick=false;
+
+    @Override
+    public void onBackPressed() {
+        if(!isdoubleClick)
+        {
+            Toast.makeText(main_activity.this,"雙擊以退出",Toast.LENGTH_LONG).show();
+            isdoubleClick=true;
+        }
+        else
+        {
+            moveTaskToBack(true);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
+        }
+        new CountDownTimer(5000,1000){
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+            @Override
+            public void onFinish() {
+                isdoubleClick=false;
+            }
+        }.start();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

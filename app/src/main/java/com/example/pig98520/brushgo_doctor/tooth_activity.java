@@ -34,8 +34,8 @@ public class tooth_activity extends AppCompatActivity {
     private String backDate;
     private Button save;
     private DatabaseReference dbRef;
-    private Button tooth[]=new Button[28];
-    private Boolean status[]=new Boolean[28];
+    private Button tooth[]=new Button[32];
+    private Boolean status[]=new Boolean[232];
     private Intent intent;
     private int id[]=new int[]
             {R.id.tooth_1,
@@ -65,7 +65,11 @@ public class tooth_activity extends AppCompatActivity {
             R.id.tooth_25,
             R.id.tooth_26,
             R.id.tooth_27,
-            R.id.tooth_28};
+            R.id.tooth_28,
+            R.id.tooth_29,
+            R.id.tooth_30,
+            R.id.tooth_31,
+            R.id.tooth_32};
 
     @Override
     public void onBackPressed() {
@@ -177,6 +181,7 @@ public class tooth_activity extends AppCompatActivity {
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
+        dialog.setTitle("請選擇回診日期");
         dialog.show();
     }
     DatePickerDialog.OnDateSetListener datepicker = new DatePickerDialog.OnDateSetListener()
