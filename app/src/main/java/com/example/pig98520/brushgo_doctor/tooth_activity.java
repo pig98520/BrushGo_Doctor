@@ -37,39 +37,22 @@ public class tooth_activity extends AppCompatActivity {
     private Button tooth[]=new Button[32];
     private Boolean status[]=new Boolean[232];
     private Intent intent;
-    private int id[]=new int[]
-            {R.id.tooth_1,
-            R.id.tooth_2,
-            R.id.tooth_3,
-            R.id.tooth_4,
-            R.id.tooth_5,
-            R.id.tooth_6,
-            R.id.tooth_7,
-            R.id.tooth_8,
-            R.id.tooth_9,
-            R.id.tooth_10,
-            R.id.tooth_11,
-            R.id.tooth_12,
-            R.id.tooth_13,
-            R.id.tooth_14,
-            R.id.tooth_15,
-            R.id.tooth_16,
-            R.id.tooth_17,
-            R.id.tooth_18,
-            R.id.tooth_19,
-            R.id.tooth_20,
-            R.id.tooth_21,
-            R.id.tooth_22,
-            R.id.tooth_23,
-            R.id.tooth_24,
-            R.id.tooth_25,
-            R.id.tooth_26,
-            R.id.tooth_27,
-            R.id.tooth_28,
-            R.id.tooth_29,
-            R.id.tooth_30,
-            R.id.tooth_31,
-            R.id.tooth_32};
+    private int id[]=new int[]{
+            R.id.tooth_1, R.id.tooth_2,R.id.tooth_3, R.id.tooth_4, R.id.tooth_5, R.id.tooth_6, R.id.tooth_7, R.id.tooth_8,
+            R.id.tooth_9, R.id.tooth_10, R.id.tooth_11, R.id.tooth_12, R.id.tooth_13, R.id.tooth_14, R.id.tooth_15, R.id.tooth_16,
+            R.id.tooth_17, R.id.tooth_18, R.id.tooth_19, R.id.tooth_20, R.id.tooth_21, R.id.tooth_22, R.id.tooth_23, R.id.tooth_24,
+            R.id.tooth_25, R.id.tooth_26, R.id.tooth_27, R.id.tooth_28, R.id.tooth_29, R.id.tooth_30, R.id.tooth_31, R.id.tooth_32};
+    private int tooth_dirty[]=new int[]{
+            R.drawable.tooth_1_, R.drawable.tooth_2_, R.drawable.tooth_3_, R.drawable.tooth_4_, R.drawable.tooth_5_, R.drawable.tooth_6_, R.drawable.tooth_7_, R.drawable.tooth_8_,
+            R.drawable.tooth_9_, R.drawable.tooth_10_, R.drawable.tooth_11_, R.drawable.tooth_12_, R.drawable.tooth_13_, R.drawable.tooth_14_, R.drawable.tooth_15_, R.drawable.tooth_16_,
+            R.drawable.tooth_1_, R.drawable.tooth_2_, R.drawable.tooth_3_, R.drawable.tooth_4_, R.drawable.tooth_5_, R.drawable.tooth_6_, R.drawable.tooth_7_, R.drawable.tooth_8_,
+            R.drawable.tooth_9_, R.drawable.tooth_10_, R.drawable.tooth_11_, R.drawable.tooth_12_, R.drawable.tooth_13_, R.drawable.tooth_14_, R.drawable.tooth_15_, R.drawable.tooth_16_};
+    private int tooth_clean[]=new int[]{
+            R.drawable.tooth_1, R.drawable.tooth_2, R.drawable.tooth_3, R.drawable.tooth_4, R.drawable.tooth_5, R.drawable.tooth_6, R.drawable.tooth_7, R.drawable.tooth_8,
+            R.drawable.tooth_9, R.drawable.tooth_10, R.drawable.tooth_11, R.drawable.tooth_12, R.drawable.tooth_13, R.drawable.tooth_14, R.drawable.tooth_15, R.drawable.tooth_16,
+            R.drawable.tooth_1, R.drawable.tooth_2, R.drawable.tooth_3, R.drawable.tooth_4, R.drawable.tooth_5, R.drawable.tooth_6, R.drawable.tooth_7, R.drawable.tooth_8,
+            R.drawable.tooth_9, R.drawable.tooth_10, R.drawable.tooth_11, R.drawable.tooth_12, R.drawable.tooth_13, R.drawable.tooth_14, R.drawable.tooth_15, R.drawable.tooth_16
+    };
 
     @Override
     public void onBackPressed() {
@@ -105,12 +88,12 @@ public class tooth_activity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.getValue().toString().trim().equals("b"))
                         {
-                            tooth[finalJ].setBackgroundResource(R.drawable.tooth_dirty_24);
+                            tooth[finalJ].setBackgroundResource(tooth_dirty[finalJ]);
                             status[finalJ]=false;
                         }
                         else
                         {
-                            tooth[finalJ].setBackgroundResource(R.drawable.tooth_clean_24);
+                            tooth[finalJ].setBackgroundResource(tooth_clean[finalJ]);
                             status[finalJ]=true;
                         }
                     }
@@ -145,12 +128,12 @@ public class tooth_activity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(!status[finalI]){
-                        tooth[finalI].setBackgroundResource(R.drawable.tooth_clean_24);
+                        tooth[finalI].setBackgroundResource(tooth_clean[finalI]);
                         status[finalI]=true;
                         dbRef.child("tooth").child(uid).child(finalI+1+"").setValue("g");
                     }
                     else {
-                        tooth[finalI].setBackgroundResource(R.drawable.tooth_dirty_24);
+                        tooth[finalI].setBackgroundResource(tooth_dirty[finalI]);
                         status[finalI]=false;
                         dbRef.child("tooth").child(uid).child(finalI+1+"").setValue("b");
                     }
