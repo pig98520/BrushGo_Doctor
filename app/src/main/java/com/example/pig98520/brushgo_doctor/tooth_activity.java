@@ -2,14 +2,18 @@ package com.example.pig98520.brushgo_doctor;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,25 +38,14 @@ public class tooth_activity extends AppCompatActivity {
     private String backDate;
     private Button save;
     private DatabaseReference dbRef;
-    private Button tooth[]=new Button[32];
+    private ImageView tooth[]=new ImageView[32];
     private Boolean status[]=new Boolean[232];
     private Intent intent;
     private int id[]=new int[]{
-            R.id.tooth_1, R.id.tooth_2,R.id.tooth_3, R.id.tooth_4, R.id.tooth_5, R.id.tooth_6, R.id.tooth_7, R.id.tooth_8,
-            R.id.tooth_9, R.id.tooth_10, R.id.tooth_11, R.id.tooth_12, R.id.tooth_13, R.id.tooth_14, R.id.tooth_15, R.id.tooth_16,
-            R.id.tooth_17, R.id.tooth_18, R.id.tooth_19, R.id.tooth_20, R.id.tooth_21, R.id.tooth_22, R.id.tooth_23, R.id.tooth_24,
-            R.id.tooth_25, R.id.tooth_26, R.id.tooth_27, R.id.tooth_28, R.id.tooth_29, R.id.tooth_30, R.id.tooth_31, R.id.tooth_32};
-    private int tooth_dirty[]=new int[]{
-            R.drawable.tooth_1_, R.drawable.tooth_2_, R.drawable.tooth_3_, R.drawable.tooth_4_, R.drawable.tooth_5_, R.drawable.tooth_6_, R.drawable.tooth_7_, R.drawable.tooth_8_,
-            R.drawable.tooth_9_, R.drawable.tooth_10_, R.drawable.tooth_11_, R.drawable.tooth_12_, R.drawable.tooth_13_, R.drawable.tooth_14_, R.drawable.tooth_15_, R.drawable.tooth_16_,
-            R.drawable.tooth_1_, R.drawable.tooth_2_, R.drawable.tooth_3_, R.drawable.tooth_4_, R.drawable.tooth_5_, R.drawable.tooth_6_, R.drawable.tooth_7_, R.drawable.tooth_8_,
-            R.drawable.tooth_9_, R.drawable.tooth_10_, R.drawable.tooth_11_, R.drawable.tooth_12_, R.drawable.tooth_13_, R.drawable.tooth_14_, R.drawable.tooth_15_, R.drawable.tooth_16_};
-    private int tooth_clean[]=new int[]{
-            R.drawable.tooth_1, R.drawable.tooth_2, R.drawable.tooth_3, R.drawable.tooth_4, R.drawable.tooth_5, R.drawable.tooth_6, R.drawable.tooth_7, R.drawable.tooth_8,
-            R.drawable.tooth_9, R.drawable.tooth_10, R.drawable.tooth_11, R.drawable.tooth_12, R.drawable.tooth_13, R.drawable.tooth_14, R.drawable.tooth_15, R.drawable.tooth_16,
-            R.drawable.tooth_1, R.drawable.tooth_2, R.drawable.tooth_3, R.drawable.tooth_4, R.drawable.tooth_5, R.drawable.tooth_6, R.drawable.tooth_7, R.drawable.tooth_8,
-            R.drawable.tooth_9, R.drawable.tooth_10, R.drawable.tooth_11, R.drawable.tooth_12, R.drawable.tooth_13, R.drawable.tooth_14, R.drawable.tooth_15, R.drawable.tooth_16
-    };
+            R.id.imageView_1, R.id.imageView_2,R.id.imageView_3, R.id.imageView_4, R.id.imageView_5, R.id.imageView_6, R.id.imageView_7, R.id.imageView_8,
+            R.id.imageView_9, R.id.imageView_10, R.id.imageView_11, R.id.imageView_12, R.id.imageView_13, R.id.imageView_14, R.id.imageView_15, R.id.imageView_16,
+            R.id.imageView_17, R.id.imageView_18, R.id.imageView_19, R.id.imageView_20, R.id.imageView_21, R.id.imageView_22, R.id.imageView_23, R.id.imageView_24,
+            R.id.imageView_25, R.id.imageView_26, R.id.imageView_27, R.id.imageView_28, R.id.imageView_29, R.id.imageView_30, R.id.imageView_31, R.id.imageView_32};
 
     @Override
     public void onBackPressed() {
@@ -88,13 +81,39 @@ public class tooth_activity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.getValue().toString().trim().equals("b"))
                         {
-                            tooth[finalJ].setBackgroundResource(tooth_dirty[finalJ]);
-                            status[finalJ]=false;
+                            dbRef.child("image").child("tooth_dirty").child(finalJ%16+1+"").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    Glide.with(tooth_activity.this)
+                                            .load(Uri.parse(dataSnapshot.getValue().toString()))
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .into(tooth[finalJ]);
+                                    status[finalJ]=false;
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
                         }
                         else
                         {
-                            tooth[finalJ].setBackgroundResource(tooth_clean[finalJ]);
-                            status[finalJ]=true;
+                            dbRef.child("image").child("tooth_clean").child(finalJ%16+1+"").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    Glide.with(tooth_activity.this)
+                                            .load(Uri.parse(dataSnapshot.getValue().toString()))
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .into(tooth[finalJ]);
+                                    status[finalJ]=true;
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
                         }
                     }
 
@@ -110,7 +129,7 @@ public class tooth_activity extends AppCompatActivity {
 
     private void processView() {
         for(int i=0;i<tooth.length;i++)
-            tooth[i] = (Button) findViewById(id[i]);
+            tooth[i] = (ImageView) findViewById(id[i]);
         pcr=(EditText)findViewById(R.id.pcr_edt);
         calendar=Calendar.getInstance();
         save=(Button)findViewById(R.id.save_btn);
@@ -128,12 +147,10 @@ public class tooth_activity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(!status[finalI]){
-                        tooth[finalI].setBackgroundResource(tooth_clean[finalI]);
                         status[finalI]=true;
                         dbRef.child("tooth").child(uid).child(finalI+1+"").setValue("g");
                     }
                     else {
-                        tooth[finalI].setBackgroundResource(tooth_dirty[finalI]);
                         status[finalI]=false;
                         dbRef.child("tooth").child(uid).child(finalI+1+"").setValue("b");
                     }
