@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -86,7 +85,7 @@ public class tooth_activity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     Glide.with(tooth_activity.this)
                                             .load(Uri.parse(dataSnapshot.getValue().toString()))
-                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .dontAnimate()
                                             .into(tooth[finalJ]);
                                     status[finalJ]=false;
                                 }
@@ -104,7 +103,7 @@ public class tooth_activity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     Glide.with(tooth_activity.this)
                                             .load(Uri.parse(dataSnapshot.getValue().toString()))
-                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .dontAnimate()
                                             .into(tooth[finalJ]);
                                     status[finalJ]=true;
                                 }
