@@ -145,7 +145,7 @@ public class main_activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 nowDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                install_date.setText("上次看診日期:"+dataSnapshot.getValue().toString().trim());
+                install_date.setText("上次看診日期:       "+dataSnapshot.getValue().toString().trim());
 
                 if(dataSnapshot.getValue().toString().trim().equals(nowDate))
                     bundle.putBoolean("back",false);
@@ -165,7 +165,7 @@ public class main_activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    back_date.setText("預計回診日期:"+dataSnapshot.getValue().toString().trim());
+                    back_date.setText("預計回診日期:      "+dataSnapshot.getValue().toString().trim());
                 }
                 else
                     back_date.setText("預計回診日期:");
