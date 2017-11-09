@@ -4,10 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -48,7 +45,6 @@ public class tooth_activity extends AppCompatActivity {
             R.id.imageView_9, R.id.imageView_10, R.id.imageView_11, R.id.imageView_12, R.id.imageView_13, R.id.imageView_14, R.id.imageView_15, R.id.imageView_16,
             R.id.imageView_17, R.id.imageView_18, R.id.imageView_19, R.id.imageView_20, R.id.imageView_21, R.id.imageView_22, R.id.imageView_23, R.id.imageView_24,
             R.id.imageView_25, R.id.imageView_26, R.id.imageView_27, R.id.imageView_28, R.id.imageView_29, R.id.imageView_30, R.id.imageView_31, R.id.imageView_32};
-    private ConstraintLayout constraintLayout;
 
     @Override
     public void onBackPressed() {
@@ -79,14 +75,45 @@ public class tooth_activity extends AppCompatActivity {
         else{
             for(int j=0;j<tooth.length;j++) {
                 final int finalJ = j;
-                dbRef.child("image").child("tooth_clean").child(j % 16 + 1 + "").addValueEventListener(new ValueEventListener() {
+                dbRef.child("tooth").child(uid).child(j+1+"").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Glide.with(tooth_activity.this)
-                                .load(Uri.parse(dataSnapshot.getValue().toString()))
-                                .dontAnimate()
-                                .into(tooth[finalJ]);
-                        status[finalJ] = true;
+                        if(dataSnapshot.getValue().toString().trim().equals("b"))
+                        {
+                            dbRef.child("image").child("tooth_dirty").child(finalJ%16+1+"").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    Glide.with(tooth_activity.this)
+                                            .load(Uri.parse(dataSnapshot.getValue().toString()))
+                                            .dontAnimate()
+                                            .into(tooth[finalJ]);
+                                    status[finalJ]=false;
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                        else
+                        {
+                            dbRef.child("image").child("tooth_clean").child(finalJ%16+1+"").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    Glide.with(tooth_activity.this)
+                                            .load(Uri.parse(dataSnapshot.getValue().toString()))
+                                            .dontAnimate()
+                                            .into(tooth[finalJ]);
+                                    status[finalJ]=true;
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
                     }
 
                     @Override
@@ -100,7 +127,6 @@ public class tooth_activity extends AppCompatActivity {
 
 
     private void processView() {
-        constraintLayout=(ConstraintLayout)findViewById(R.id.constraintLayout);
         for(int i=0;i<tooth.length;i++)
             tooth[i] = (ImageView) findViewById(id[i]);
         pcr=(EditText)findViewById(R.id.pcr_edt);
@@ -145,13 +171,6 @@ public class tooth_activity extends AppCompatActivity {
                         Toast.makeText(tooth_activity.this,"PCR已儲存",Toast.LENGTH_LONG).show();
                     }
                 }
-            }
-        });
-        constraintLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Log.i("TAGGG",event.getX()+event.getY()+"");
-                return false;
             }
         });
     }
