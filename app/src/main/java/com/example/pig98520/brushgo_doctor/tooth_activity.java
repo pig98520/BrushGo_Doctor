@@ -124,8 +124,7 @@ public class tooth_activity extends AppCompatActivity {
             }
         }
     }
-
-
+    
     private void processView() {
         for(int i=0;i<tooth.length;i++)
             tooth[i] = (ImageView) findViewById(id[i]);
