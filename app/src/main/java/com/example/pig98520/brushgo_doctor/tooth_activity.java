@@ -1,18 +1,12 @@
 package com.example.pig98520.brushgo_doctor;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,30 +22,45 @@ import java.util.Locale;
  */
 
 public class tooth_activity extends AppCompatActivity {
+    private ConstraintLayout thisLayout;
     private Bundle bundle;
     private String uid;
-    private boolean back;
-    private EditText pcr;
+    private boolean back=false;
     private Calendar calendar;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN);
     private String backDate;
-    private Button save;
     private DatabaseReference dbRef;
-    private ImageView tooth[]=new ImageView[32];
-    private Boolean status[]=new Boolean[232];
     private Intent intent;
-    private int id[]=new int[]{
-            R.id.imageView_1, R.id.imageView_2,R.id.imageView_3, R.id.imageView_4, R.id.imageView_5, R.id.imageView_6, R.id.imageView_7, R.id.imageView_8,
-            R.id.imageView_9, R.id.imageView_10, R.id.imageView_11, R.id.imageView_12, R.id.imageView_13, R.id.imageView_14, R.id.imageView_15, R.id.imageView_16,
-            R.id.imageView_17, R.id.imageView_18, R.id.imageView_19, R.id.imageView_20, R.id.imageView_21, R.id.imageView_22, R.id.imageView_23, R.id.imageView_24,
-            R.id.imageView_25, R.id.imageView_26, R.id.imageView_27, R.id.imageView_28, R.id.imageView_29, R.id.imageView_30, R.id.imageView_31, R.id.imageView_32};
+    private Button btn_save;
+
+    private Button[] btn_in=new Button[32];
+    private boolean[] condition_in =new boolean[32];
+    private int[] btn_in_id={R.id.tooth_in_1,R.id.tooth_in_2,R.id.tooth_in_3,R.id.tooth_in_4,
+            R.id.tooth_in_5,R.id.tooth_in_6,R.id.tooth_in_7,R.id.tooth_in_8,
+            R.id.tooth_in_9,R.id.tooth_in_10,R.id.tooth_in_11,R.id.tooth_in_12,
+            R.id.tooth_in_13,R.id.tooth_in_14,R.id.tooth_in_15,R.id.tooth_in_16,
+            R.id.tooth_in_17,R.id.tooth_in_18,R.id.tooth_in_19,R.id.tooth_in_20,
+            R.id.tooth_in_21,R.id.tooth_in_22,R.id.tooth_in_23,R.id.tooth_in_24,
+            R.id.tooth_in_25,R.id.tooth_in_26,R.id.tooth_in_27,R.id.tooth_in_28,
+            R.id.tooth_in_29,R.id.tooth_in_30,R.id.tooth_in_31,R.id.tooth_in_32};
+
+    private Button[] btn_out=new Button[32];
+    private boolean[] condition_out =new boolean[32];
+    private int[] btn_out_id={R.id.tooth_out_1,R.id.tooth_out_2,R.id.tooth_out_3,R.id.tooth_out_4,
+            R.id.tooth_out_5,R.id.tooth_out_6,R.id.tooth_out_7,R.id.tooth_out_8,
+            R.id.tooth_out_9,R.id.tooth_out_10,R.id.tooth_out_11,R.id.tooth_out_12,
+            R.id.tooth_out_13,R.id.tooth_out_14,R.id.tooth_out_15,R.id.tooth_out_16,
+            R.id.tooth_out_17,R.id.tooth_out_18,R.id.tooth_out_19,R.id.tooth_out_20,
+            R.id.tooth_out_21,R.id.tooth_out_22,R.id.tooth_out_23,R.id.tooth_out_24,
+            R.id.tooth_out_25,R.id.tooth_out_26,R.id.tooth_out_27,R.id.tooth_out_28,
+            R.id.tooth_out_29,R.id.tooth_out_30,R.id.tooth_out_31,R.id.tooth_out_32};
+
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         intent=new Intent();
         intent.setClass(tooth_activity.this,main_activity.class);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -60,59 +69,42 @@ public class tooth_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tooth_activity);
         processView();
-        setToothCondition();
         processControl();
+        setTooth();
     }
 
-    private void setToothCondition() {
-        if(!back)
-        {
-            for(int i=0;i<tooth.length;i++) {
-                dbRef.child("tooth").child(uid).child(i + 1 + "").setValue("g");
-                status[i]=true;
-            }
-        }
-        else{
-            for(int j=0;j<tooth.length;j++) {
-                final int finalJ = j;
-                dbRef.child("tooth").child(uid).child(j+1+"").addValueEventListener(new ValueEventListener() {
+    private void setTooth() {
+        if(back){
+            for(int i=0;i<btn_in.length;i++) {
+                final int finalI = i;
+                dbRef.child("tooth").child(uid).child(i + 1 + "").child("in").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.getValue().toString().trim().equals("b"))
-                        {
-                            dbRef.child("image").child("tooth_dirty").child(finalJ%16+1+"").addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    Glide.with(tooth_activity.this)
-                                            .load(Uri.parse(dataSnapshot.getValue().toString()))
-                                            .dontAnimate()
-                                            .into(tooth[finalJ]);
-                                    status[finalJ]=false;
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
-                            });
+                        if(dataSnapshot.getValue().equals("g")) {
+                            btn_in[finalI].setBackgroundResource(R.drawable.background_mark);
+                            condition_in[finalI]=true;
                         }
-                        else
-                        {
-                            dbRef.child("image").child("tooth_clean").child(finalJ%16+1+"").addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    Glide.with(tooth_activity.this)
-                                            .load(Uri.parse(dataSnapshot.getValue().toString()))
-                                            .dontAnimate()
-                                            .into(tooth[finalJ]);
-                                    status[finalJ]=true;
-                                }
+                        else{
+                            btn_in[finalI].setBackgroundResource(R.drawable.red_mark);
+                            condition_in[finalI]=false;
+                        }
+                    }
 
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                                }
-                            });
+                    }
+                });
+                dbRef.child("tooth").child(uid).child(i + 1 + "").child("out").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.getValue().equals("g")) {
+                            btn_out[finalI].setBackgroundResource(R.drawable.background_mark);
+                            condition_out[finalI]=true;
+                        }
+                        else{
+                            btn_out[finalI].setBackgroundResource(R.drawable.red_mark);
+                            condition_out[finalI]=false;
                         }
                     }
 
@@ -123,57 +115,83 @@ public class tooth_activity extends AppCompatActivity {
                 });
             }
         }
+        else if(!back){
+            for(int i=0;i<btn_in.length;i++){
+                updateData("in","g",i);
+                updateData("out","g",i);
+                condition_in[i]=true;
+                condition_out[i]=true;
+            }
+            setTooth();
+        }
     }
-    
+
     private void processView() {
-        for(int i=0;i<tooth.length;i++)
-            tooth[i] = (ImageView) findViewById(id[i]);
-        pcr=(EditText)findViewById(R.id.pcr_edt);
+        thisLayout =(ConstraintLayout)findViewById(R.id.constraintLayout);
         calendar=Calendar.getInstance();
-        save=(Button)findViewById(R.id.save_btn);
         dbRef= FirebaseDatabase.getInstance().getReference();
         bundle = this.getIntent().getExtras();
         uid = bundle.getString("uid");
-        back=bundle.getBoolean("back");
+        back= bundle.getBoolean("back");
+        for(int i=0;i<btn_in.length;i++) {
+            btn_in[i] = (Button) findViewById(btn_in_id[i]);
+            btn_out[i] = (Button) findViewById(btn_out_id[i]);
+        }
+        btn_save =(Button)findViewById(R.id.btn_save);
     }
 
     private void processControl() {
-        for(int i=0;i<tooth.length;i++)
-        {
+        for (int i = 0; i < btn_in.length; i++) {
             final int finalI = i;
-            tooth[finalI].setOnClickListener(new View.OnClickListener() {
+            btn_in[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!status[finalI]){
-                        status[finalI]=true;
-                        dbRef.child("tooth").child(uid).child(finalI+1+"").setValue("g");
+                    if(condition_in[finalI]==false)
+                    {
+                     condition_in[finalI]=true;
+                     btn_in[finalI].setBackgroundResource(R.drawable.background_mark);
+                     updateData("in","g",finalI);
                     }
-                    else {
-                        status[finalI]=false;
-                        dbRef.child("tooth").child(uid).child(finalI+1+"").setValue("b");
+                    else{
+                        condition_in[finalI]=false;
+                        btn_in[finalI].setBackgroundResource(R.drawable.red_mark);
+                        updateData("in","b",finalI);
                     }
                 }
             });
         }
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(pcr.getText().toString().trim().equals(""))
-                    Toast.makeText(tooth_activity.this,"請輸入PCR",Toast.LENGTH_LONG).show();
-                else {
-                    if(!back) {
-                        dbRef.child("profile").child(uid).child("first_pcr").setValue(pcr.getText().toString().trim());
-                        backTimedialog();
+        for (int i = 0; i < btn_out.length; i++) {
+            final int finalI = i;
+            btn_out[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(condition_out[finalI]==false)
+                    {
+                        condition_out[finalI]=true;
+                        btn_out[finalI].setBackgroundResource(R.drawable.background_mark);
+                        updateData("out","g",finalI);
                     }
-                    else if(back) {
-                        dbRef.child("profile").child(uid).child("second_pcr").setValue(pcr.getText().toString().trim());
-                        Toast.makeText(tooth_activity.this,"PCR已儲存",Toast.LENGTH_LONG).show();
+                    else{
+                        condition_out[finalI]=false;
+                        btn_out[finalI].setBackgroundResource(R.drawable.red_mark);
+                        updateData("out","b",finalI);
                     }
                 }
+            });
+        }
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(tooth_activity.this,main_activity.class));
             }
         });
     }
-    private void backTimedialog() {
+
+    private void updateData(String position, String condition, int i) {
+        dbRef.child("tooth").child(uid).child(i+1+"").child(position).setValue(condition);
+    }
+
+    /*private void backTimedialog() {
         DatePickerDialog dialog = new DatePickerDialog(tooth_activity.this,
                 datepicker,
                 calendar.get(Calendar.YEAR),
@@ -194,5 +212,5 @@ public class tooth_activity extends AppCompatActivity {
             dbRef.child("profile").child(uid).child("back_date").setValue(backDate);
             Toast.makeText(tooth_activity.this,"PCR及回診日期已儲存",Toast.LENGTH_LONG).show();
         }
-    };
+    };*/
 }

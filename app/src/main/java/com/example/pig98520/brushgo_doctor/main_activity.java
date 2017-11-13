@@ -39,6 +39,7 @@ public class main_activity extends AppCompatActivity {
     private Bundle bundle;
     private boolean isdoubleClick=false;
 
+
     @Override
     public void onBackPressed() {
         if(!isdoubleClick)
@@ -150,8 +151,8 @@ public class main_activity extends AppCompatActivity {
                 if(dataSnapshot.getValue().toString().trim().equals(nowDate))
                     bundle.putBoolean("back",false);
                 else {
-                    bundle.putBoolean("back", true);
-                    dbRef.child(uid).child("back_date").setValue(nowDate);
+                    bundle.putBoolean("back",true);
+/*                    dbRef.child(uid).child("back_date").setValue(nowDate);*/
                 }
             }
 
