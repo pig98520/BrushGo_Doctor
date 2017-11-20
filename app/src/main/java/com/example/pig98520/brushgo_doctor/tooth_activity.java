@@ -33,7 +33,7 @@ public class tooth_activity extends AppCompatActivity {
     private Bundle bundle;
     private String uid;
     private boolean back=false;
-    private boolean isValue=false;
+    private boolean isBack =false;
     private Calendar calendar;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN);
     private String backDate;
@@ -86,6 +86,12 @@ public class tooth_activity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tooth_activity);
@@ -96,7 +102,7 @@ public class tooth_activity extends AppCompatActivity {
     }
 
     private void setTooth() {
-        if(!isValue){
+        if(isBack){
             for(int i=0;i<btn_in.length;i++) {
                 final int finalI = i;
                 dbRef.child("tooth").child(uid).child(i + 1 + "").child("in").addValueEventListener(new ValueEventListener() {
@@ -144,14 +150,14 @@ public class tooth_activity extends AppCompatActivity {
                 condition_in[i]=true;
                 condition_out[i]=true;
             }
+            isBack =true;
             setTooth();
-            isValue=true;
         }
     }
 
 
     private void setInterdental() {
-        if(isValue){
+        if(isBack){
             for(int i=0;i<btn_interdental.length;i++){
                 final int finalI = i;
                 dbRef.child("interdental").child(uid).child(i+1+"").addValueEventListener(new ValueEventListener() {
@@ -178,7 +184,7 @@ public class tooth_activity extends AppCompatActivity {
             for(int i=0;i<btn_interdental.length;i++){
                 dbRef.child("interdental").child(uid).child(i+1+"").setValue("g");
             }
-            isValue=true;
+            isBack =true;
             setInterdental();
         }
     }
@@ -188,7 +194,7 @@ public class tooth_activity extends AppCompatActivity {
         bundle = this.getIntent().getExtras();
         uid = bundle.getString("uid");
         back= bundle.getBoolean("back");
-        isValue=back;
+        isBack =back;
         for(int i=0;i<btn_in.length;i++) {
             btn_in[i] = (Button) findViewById(btn_in_id[i]);
             btn_out[i] = (Button) findViewById(btn_out_id[i]);
