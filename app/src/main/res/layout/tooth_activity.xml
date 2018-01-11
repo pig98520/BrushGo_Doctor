@@ -9,7 +9,7 @@
     tools:context="com.example.pig98520.brushgo_doctor.main_activity">
 
     <Button
-        android:id="@+id/tooth_in_1"
+        android:id="@+id/tooth_in_16"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -28,7 +28,7 @@
         app:layout_constraintVertical_bias="0.418" />
 
     <Button
-        android:id="@+id/tooth_in_2"
+        android:id="@+id/tooth_in_15"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_bias="0.338" />
 
     <Button
-        android:id="@+id/tooth_in_3"
+        android:id="@+id/tooth_in_14"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -64,7 +64,7 @@
         app:layout_constraintVertical_bias="0.267" />
 
     <Button
-        android:id="@+id/tooth_in_4"
+        android:id="@+id/tooth_in_13"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -82,7 +82,7 @@
         app:layout_constraintVertical_bias="0.213" />
 
     <Button
-        android:id="@+id/tooth_in_5"
+        android:id="@+id/tooth_in_12"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -100,7 +100,7 @@
         app:layout_constraintVertical_bias="0.17" />
 
     <Button
-        android:id="@+id/tooth_in_6"
+        android:id="@+id/tooth_in_11"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -118,7 +118,7 @@
         app:layout_constraintVertical_bias="0.126" />
 
     <Button
-        android:id="@+id/tooth_in_7"
+        android:id="@+id/tooth_in_10"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -136,7 +136,7 @@
         app:layout_constraintVertical_bias="0.105" />
 
     <Button
-        android:id="@+id/tooth_in_8"
+        android:id="@+id/tooth_in_9"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -154,7 +154,7 @@
         app:layout_constraintVertical_bias="0.096" />
 
     <Button
-        android:id="@+id/tooth_in_9"
+        android:id="@+id/tooth_in_8"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -172,7 +172,7 @@
         app:layout_constraintVertical_bias="0.096" />
 
     <Button
-        android:id="@+id/tooth_in_10"
+        android:id="@+id/tooth_in_7"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -190,7 +190,7 @@
         app:layout_constraintVertical_bias="0.105" />
 
     <Button
-        android:id="@+id/tooth_in_11"
+        android:id="@+id/tooth_in_6"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -208,7 +208,7 @@
         app:layout_constraintVertical_bias="0.126" />
 
     <Button
-        android:id="@+id/tooth_in_12"
+        android:id="@+id/tooth_in_5"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -226,7 +226,7 @@
         app:layout_constraintVertical_bias="0.159" />
 
     <Button
-        android:id="@+id/tooth_in_13"
+        android:id="@+id/tooth_in_4"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -244,7 +244,7 @@
         app:layout_constraintVertical_bias="0.212" />
 
     <Button
-        android:id="@+id/tooth_in_14"
+        android:id="@+id/tooth_in_3"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -262,7 +262,7 @@
         app:layout_constraintVertical_bias="0.267" />
 
     <Button
-        android:id="@+id/tooth_in_15"
+        android:id="@+id/tooth_in_2"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -280,7 +280,7 @@
         app:layout_constraintVertical_bias="0.338" />
 
     <Button
-        android:id="@+id/tooth_in_16"
+        android:id="@+id/tooth_in_1"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -586,7 +586,7 @@
         app:layout_constraintVertical_bias="0.553" />
 
     <Button
-        android:id="@+id/tooth_out_1"
+        android:id="@+id/tooth_out_16"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -604,7 +604,7 @@
         app:layout_constraintVertical_bias="0.417" />
 
     <Button
-        android:id="@+id/tooth_out_2"
+        android:id="@+id/tooth_out_15"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -622,7 +622,7 @@
         app:layout_constraintVertical_bias="0.337" />
 
     <Button
-        android:id="@+id/tooth_out_3"
+        android:id="@+id/tooth_out_14"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -640,7 +640,7 @@
         app:layout_constraintVertical_bias="0.266" />
 
     <Button
-        android:id="@+id/tooth_out_4"
+        android:id="@+id/tooth_out_13"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -658,7 +658,7 @@
         app:layout_constraintVertical_bias="0.193" />
 
     <Button
-        android:id="@+id/tooth_out_5"
+        android:id="@+id/tooth_out_12"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -676,7 +676,7 @@
         app:layout_constraintVertical_bias="0.105" />
 
     <Button
-        android:id="@+id/tooth_out_6"
+        android:id="@+id/tooth_out_11"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -694,7 +694,7 @@
         app:layout_constraintVertical_bias="0.050000012" />
 
     <Button
-        android:id="@+id/tooth_out_7"
+        android:id="@+id/tooth_out_10"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -712,7 +712,7 @@
         app:layout_constraintVertical_bias="0.025" />
 
     <Button
-        android:id="@+id/tooth_out_8"
+        android:id="@+id/tooth_out_9"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -730,7 +730,7 @@
         app:layout_constraintVertical_bias="0.006" />
 
     <Button
-        android:id="@+id/tooth_out_9"
+        android:id="@+id/tooth_out_8"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -748,7 +748,7 @@
         app:layout_constraintVertical_bias="0.006" />
 
     <Button
-        android:id="@+id/tooth_out_10"
+        android:id="@+id/tooth_out_7"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -766,7 +766,7 @@
         app:layout_constraintVertical_bias="0.025" />
 
     <Button
-        android:id="@+id/tooth_out_11"
+        android:id="@+id/tooth_out_6"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -784,7 +784,7 @@
         app:layout_constraintVertical_bias="0.050000012" />
 
     <Button
-        android:id="@+id/tooth_out_12"
+        android:id="@+id/tooth_out_5"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -802,7 +802,7 @@
         app:layout_constraintVertical_bias="0.112" />
 
     <Button
-        android:id="@+id/tooth_out_13"
+        android:id="@+id/tooth_out_4"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -820,7 +820,7 @@
         app:layout_constraintVertical_bias="0.193" />
 
     <Button
-        android:id="@+id/tooth_out_14"
+        android:id="@+id/tooth_out_3"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -838,7 +838,7 @@
         app:layout_constraintVertical_bias="0.258" />
 
     <Button
-        android:id="@+id/tooth_out_15"
+        android:id="@+id/tooth_out_2"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -856,7 +856,7 @@
         app:layout_constraintVertical_bias="0.337" />
 
     <Button
-        android:id="@+id/tooth_out_16"
+        android:id="@+id/tooth_out_1"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1162,7 +1162,7 @@
         app:layout_constraintVertical_bias="0.55" />
 
     <Button
-        android:id="@+id/interdental_1"
+        android:id="@+id/interdental_15"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1180,7 +1180,7 @@
         app:layout_constraintVertical_bias="0.383" />
 
     <Button
-        android:id="@+id/interdental_2"
+        android:id="@+id/interdental_14"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1198,7 +1198,7 @@
         app:layout_constraintVertical_bias="0.303" />
 
     <Button
-        android:id="@+id/interdental_3"
+        android:id="@+id/interdental_13"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1216,7 +1216,7 @@
         app:layout_constraintVertical_bias="0.231" />
 
     <Button
-        android:id="@+id/interdental_4"
+        android:id="@+id/interdental_12"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1234,7 +1234,7 @@
         app:layout_constraintVertical_bias="0.17" />
 
     <Button
-        android:id="@+id/interdental_5"
+        android:id="@+id/interdental_11"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1252,7 +1252,7 @@
         app:layout_constraintVertical_bias="0.118" />
 
     <Button
-        android:id="@+id/interdental_6"
+        android:id="@+id/interdental_10"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1270,7 +1270,7 @@
         app:layout_constraintVertical_bias="0.077" />
 
     <Button
-        android:id="@+id/interdental_7"
+        android:id="@+id/interdental_9"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1305,7 +1305,7 @@
         app:layout_constraintVertical_bias="0.05" />
 
     <Button
-        android:id="@+id/interdental_9"
+        android:id="@+id/interdental_7"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1323,7 +1323,7 @@
         app:layout_constraintVertical_bias="0.06" />
 
     <Button
-        android:id="@+id/interdental_10"
+        android:id="@+id/interdental_6"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1341,7 +1341,7 @@
         app:layout_constraintVertical_bias="0.077" />
 
     <Button
-        android:id="@+id/interdental_11"
+        android:id="@+id/interdental_5"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1359,7 +1359,7 @@
         app:layout_constraintVertical_bias="0.112" />
 
     <Button
-        android:id="@+id/interdental_12"
+        android:id="@+id/interdental_4"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1377,7 +1377,7 @@
         app:layout_constraintVertical_bias="0.17" />
 
     <Button
-        android:id="@+id/interdental_13"
+        android:id="@+id/interdental_3"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1395,7 +1395,7 @@
         app:layout_constraintVertical_bias="0.231" />
 
     <Button
-        android:id="@+id/interdental_14"
+        android:id="@+id/interdental_2"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -1413,7 +1413,7 @@
         app:layout_constraintVertical_bias="0.303" />
 
     <Button
-        android:id="@+id/interdental_15"
+        android:id="@+id/interdental_1"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
