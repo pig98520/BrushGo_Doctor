@@ -148,12 +148,12 @@ public class main_activity extends AppCompatActivity {
                 nowDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 install_date.setText("上次看診日期:       "+dataSnapshot.getValue().toString().trim());
 
-                if(dataSnapshot.getValue().toString().trim().equals(nowDate))
+/*                if(dataSnapshot.getValue().toString().trim().equals(nowDate))
                     bundle.putBoolean("back",false);
                 else {
                     bundle.putBoolean("back",true);
-/*                    dbRef.child(uid).child("back_date").setValue(nowDate);*/
-                }
+                    dbRef.child(uid).child("back_date").setValue(nowDate);
+                }*/
             }
 
             @Override
@@ -167,9 +167,12 @@ public class main_activity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     back_date.setText("預計回診日期:      "+dataSnapshot.getValue().toString().trim());
+                    bundle.putBoolean("back",true);
                 }
-                else
+                else{
                     back_date.setText("預計回診日期:");
+                    bundle.putBoolean("back",false);
+                }
             }
 
             @Override

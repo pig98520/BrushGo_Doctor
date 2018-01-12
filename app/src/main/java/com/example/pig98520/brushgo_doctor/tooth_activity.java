@@ -230,7 +230,10 @@ public class tooth_activity extends AppCompatActivity {
         customDialog.setContentView(R.layout.custom_dialog_text);
         customDialog.setCancelable(false);
         dialog_message = (TextView) customDialog.findViewById(R.id.message);
-        dialog_message.setText("請輸入PCR分數:");
+        if(back)
+            dialog_message.setText("請輸入回診PCR分數:");
+        else
+            dialog_message.setText("請輸入初診PCR分數:");
         dialog_confirm = (Button) customDialog.findViewById(R.id.confirm);
         dialog_confirm.setText("確認");
         dialog_input=(EditText)customDialog.findViewById(R.id.input);
