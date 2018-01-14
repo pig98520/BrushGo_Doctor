@@ -71,6 +71,13 @@ public class tooth_activity extends AppCompatActivity {
             R.id.interdental_21,R.id.interdental_22,R.id.interdental_23,R.id.interdental_24,R.id.interdental_25,
             R.id.interdental_26,R.id.interdental_27,R.id.interdental_28,R.id.interdental_29,R.id.interdental_30};
 
+    private Button[] btn_tooth=new Button[32];
+    private int[] btn_tooth_id={R.id.tooth_1,R.id.tooth_2,R.id.tooth_3,R.id.tooth_4,R.id.tooth_5,R.id.tooth_6,R.id.tooth_7,R.id.tooth_8,
+            R.id.tooth_9,R.id.tooth_10,R.id.tooth_11,R.id.tooth_12,R.id.tooth_13,R.id.tooth_14,R.id.tooth_15,R.id.tooth_16,
+            R.id.tooth_17,R.id.tooth_18,R.id.tooth_19,R.id.tooth_20,R.id.tooth_21,R.id.tooth_22,R.id.tooth_23,R.id.tooth_24,
+            R.id.tooth_25,R.id.tooth_26,R.id.tooth_27,R.id.tooth_28,R.id.tooth_29,R.id.tooth_30,R.id.tooth_31,R.id.tooth_32};
+    private boolean[] hasTooth=new boolean[32];
+
     private GestureDetectorCompat gestureDetectorCompat;
     private Dialog customDialog;
     private TextView dialog_message;
@@ -111,10 +118,18 @@ public class tooth_activity extends AppCompatActivity {
                         if(dataSnapshot.getValue().equals("g")) {
                             btn_in[finalI].setBackgroundResource(R.drawable.transparent_mark);
                             condition_in[finalI]=true;
+                            btn_tooth[finalI].setBackgroundResource(R.drawable.transparent_mark);
+                            hasTooth[finalI]=true;
                         }
-                        else{
+                        else if(dataSnapshot.getValue().equals("b")){
                             btn_in[finalI].setBackgroundResource(R.drawable.red_mark);
                             condition_in[finalI]=false;
+                            btn_tooth[finalI].setBackgroundResource(R.drawable.transparent_mark);
+                            hasTooth[finalI]=true;
+                        }
+                        else if(dataSnapshot.getValue().equals(null)){
+                            btn_tooth[finalI].setBackgroundResource(R.drawable.black_mark);
+                            hasTooth[finalI]=false;
                         }
                     }
 
@@ -130,7 +145,7 @@ public class tooth_activity extends AppCompatActivity {
                             btn_out[finalI].setBackgroundResource(R.drawable.transparent_mark);
                             condition_out[finalI]=true;
                         }
-                        else{
+                        else if(dataSnapshot.getValue().equals("b")){
                             btn_out[finalI].setBackgroundResource(R.drawable.red_mark);
                             condition_out[finalI]=false;
                         }
@@ -149,6 +164,7 @@ public class tooth_activity extends AppCompatActivity {
                 updateData("out","g",i);
                 condition_in[i]=true;
                 condition_out[i]=true;
+                hasTooth[i]=true;
             }
             isBack =true;
             setTooth();
@@ -163,13 +179,22 @@ public class tooth_activity extends AppCompatActivity {
                 dbRef.child("interdental").child(uid).child(i+1+"").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.getValue().equals("g")){
-                            btn_interdental[finalI].setBackgroundResource(R.drawable.transparent_mark);
-                            condition_interdental[finalI]=true;
+                        if(dataSnapshot.exists()){
+                            if(dataSnapshot.getValue().equals("g")){
+                                btn_interdental[finalI].setBackgroundResource(R.drawable.transparent_mark);
+                                condition_interdental[finalI]=true;
+                            }
+                            else{
+                                btn_interdental[finalI].setBackgroundResource(R.drawable.red_mark);
+                                condition_interdental[finalI]=false;
+                            }
                         }
                         else{
-                            btn_interdental[finalI].setBackgroundResource(R.drawable.red_mark);
-                            condition_interdental[finalI]=false;
+                            for(int i=0;i<btn_interdental.length;i++){
+                                dbRef.child("interdental").child(uid).child(i+1+"").setValue("g");
+                            }
+                            isBack =true;
+                            setInterdental();
                         }
                     }
 
@@ -198,6 +223,7 @@ public class tooth_activity extends AppCompatActivity {
         for(int i=0;i<btn_in.length;i++) {
             btn_in[i] = (Button) findViewById(btn_in_id[i]);
             btn_out[i] = (Button) findViewById(btn_out_id[i]);
+            btn_tooth[i]=(Button)findViewById(btn_tooth_id[i]);
         }
         for(int i=0;i<btn_interdental.length;i++)
             btn_interdental[i]=(Button)findViewById(btn_interdental_id[i]);
@@ -289,6 +315,27 @@ public class tooth_activity extends AppCompatActivity {
                         condition_in[finalI]=false;
                         btn_in[finalI].setBackgroundResource(R.drawable.red_mark);
                         updateData("in","b",finalI);
+                    }
+                }
+            });
+            btn_tooth[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(hasTooth[finalI]==true){
+                        hasTooth[finalI]=false;
+                        btn_tooth[finalI].setBackgroundResource(R.drawable.black_mark);
+                        updateData("in","null",finalI);
+                        updateData("out","null",finalI);
+                        btn_in[finalI].setClickable(false);
+                        btn_out[finalI].setClickable(false);
+                    }
+                    else{
+                        hasTooth[finalI]=false;
+                        btn_tooth[finalI].setBackgroundResource(R.drawable.transparent_mark);
+                        updateData("in","g",finalI);
+                        updateData("out","g",finalI);
+                        btn_in[finalI].setClickable(true);
+                        btn_out[finalI].setClickable(true);
                     }
                 }
             });
