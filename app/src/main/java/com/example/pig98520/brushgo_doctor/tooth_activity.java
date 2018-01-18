@@ -38,7 +38,10 @@ public class tooth_activity extends AppCompatActivity {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN);
     private String backDate;
     private DatabaseReference dbRef;
-    private Intent intent;
+
+    private Button tag_finish;
+    private Button back_menu;
+    private Boolean isFinish=false;
 
     private Button[] btn_in=new Button[32];
     private boolean[] condition_in =new boolean[32];
@@ -86,16 +89,17 @@ public class tooth_activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        intent=new Intent();
-        intent.setClass(tooth_activity.this,main_activity.class);
-        startActivity(intent);
+        if(isFinish){
+            startActivity(new Intent(tooth_activity.this,main_activity.class));
+        }
+        else{
+            notifiDialog();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override
@@ -214,6 +218,8 @@ public class tooth_activity extends AppCompatActivity {
         }
     }
     private void processView() {
+        tag_finish=(Button)findViewById(R.id.btn_tag_finish);
+        back_menu=(Button)findViewById(R.id.btn_menu);
         calendar=Calendar.getInstance();
         dbRef= FirebaseDatabase.getInstance().getReference();
         bundle = this.getIntent().getExtras();
@@ -252,6 +258,7 @@ public class tooth_activity extends AppCompatActivity {
     }
 
     private void pcrDialog() {
+        isFinish=true;
         customDialog =new Dialog(this,R.style.DialogCustom);
         customDialog.setContentView(R.layout.custom_dialog_text);
         customDialog.setCancelable(false);
@@ -282,6 +289,25 @@ public class tooth_activity extends AppCompatActivity {
         });
     }
 
+
+    private void notifiDialog() {
+        customDialog =new Dialog(this,R.style.DialogCustom);
+        customDialog.setContentView(R.layout.custom_dialog_button);
+        customDialog.setCancelable(false);
+        dialog_message = (TextView) customDialog.findViewById(R.id.message);
+        dialog_message.setText("您尚未完成病患資料輸入喔，請按下『標註完成』以完成後續動作。");
+        dialog_confirm = (Button) customDialog.findViewById(R.id.confirm);
+        dialog_confirm.setText("確認");
+        customDialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_rounded);
+        customDialog.show();
+
+        dialog_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customDialog.dismiss();
+            }
+        });
+    }
 
     private void processControl() {
         for (int i = 0; i < btn_out.length; i++) {
@@ -336,6 +362,23 @@ public class tooth_activity extends AppCompatActivity {
                         updateData("out","g",finalI);
                         btn_in[finalI].setClickable(true);
                         btn_out[finalI].setClickable(true);
+                    }
+                }
+            });
+            tag_finish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pcrDialog();
+                }
+            });
+            back_menu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(isFinish){
+                        startActivity(new Intent(tooth_activity.this,main_activity.class));
+                    }
+                    else{
+                        notifiDialog();
                     }
                 }
             });
