@@ -32,6 +32,7 @@ public class main_activity extends AppCompatActivity {
     private TextView install_date;
     private TextView back_date;
     private Button confirm;
+    private Button delete;
     private List<String> nameList = new ArrayList<String>();
     private ArrayAdapter<String> nameAdapter;
     private DatabaseReference dbRef;
@@ -79,6 +80,7 @@ public class main_activity extends AppCompatActivity {
         nameAdapter.setDropDownViewResource(R.layout.spinner_style);
         name_spin.setAdapter(nameAdapter);
         confirm=(Button)findViewById(R.id.confirm_btn);
+        delete=(Button)findViewById(R.id.del_btn);
         install_date=(TextView)findViewById(R.id.txt_installDate);
         back_date=(TextView)findViewById(R.id.txt_backDate);
         intent = new Intent();
@@ -139,15 +141,25 @@ public class main_activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String [] nodes={"profile","interdental","record","setting","tooth","touched"};
+                for(int i=0;i<nodes.length;i++) {
+                    FirebaseDatabase.getInstance().getReference().child(nodes[i]).child(uid).removeValue();
+                }
+            }
+        });
     }
 
     private void checkDate() {
         dbRef.child(uid).child("install_date").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                nowDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                install_date.setText("   "+dataSnapshot.getValue().toString().trim());
-
+                if(dataSnapshot.exists()) {
+                    nowDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                    install_date.setText("   " + dataSnapshot.getValue().toString().trim());
+                }
 /*                if(dataSnapshot.getValue().toString().trim().equals(nowDate))
                     bundle.putBoolean("back",false);
                 else {
